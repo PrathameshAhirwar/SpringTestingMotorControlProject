@@ -30,25 +30,26 @@ class MotorController:
         self.root.iconbitmap("resources/icon-removebg.ico")
         self.logo = Image.open("resources/image.png")
 
-        #TODO: Remove this comment after connecting Arduino
+        #TODO: Please manually change the com port to Arduino COM port
+        # we have set it to COM5, as default
 
-        #self.serial = serial.Serial('COM5', 9600)
-        #time.sleep(2)
-        #with open("./arduino/sketch_mar14a.ino", 'r') as f:
-        #   code = f.read()
-        #  self.serial.write(code.encode())
-        #self.filename = 'weight_data.xlsx'
+        self.serial = serial.Serial('COM5', 9600)
+        time.sleep(2)
+        with open("./arduino/sketch_mar14a.ino", 'r') as f:
+          code = f.read()
+          self.serial.write(code.encode())
+        self.filename = 'weight_data.xlsx'
 
         # check if the file already exists
-        #if os.path.isfile(self.filename):
-        #    self.wb = load_workbook(filename=self.filename)
-        #   self.ws = self.wb.active
-        #else:
-        #   self.wb = Workbook()
-        #    self.ws = self.wb.active
-        #    self.ws.append(['Time', 'Weight (g)','Result'])
-        #    self.wb.save(self.filename)
-
+        if os.path.isfile(self.filename):
+            self.wb = load_workbook(filename=self.filename)
+            self.ws = self.wb.active
+        else:
+           self.wb = Workbook()
+           self.ws = self.wb.active
+           self.ws.append(['Time', 'Weight (g)','Result'])
+           self.wb.save(self.filename)
+        #
         # Create dropdown menu for selecting serial port
         self.logo = self.logo.resize((150, 150))  # resize the image
         self.logo_tk = ImageTk.PhotoImage(self.logo)
@@ -101,7 +102,7 @@ class MotorController:
 
         self.graph_button = tk.Button(text="Generate Graph", command=self.generate_graph)
         self.graph_button.pack(side=tk.LEFT, padx=10, pady=10, anchor='nw')
-        
+
         
 
 
