@@ -33,7 +33,7 @@ class MotorController:
         #TODO: Please manually change the com port to Arduino COM port
         # we have set it to COM5, as default
 
-        self.serial = serial.Serial('COM5', 9600)
+        self.serial = serial.Serial('COM5', 9600, timeout=3)
         time.sleep(2)
         with open("./arduino/sketch_mar14a.ino", 'r') as f:
           code = f.read()
