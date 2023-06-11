@@ -28,7 +28,7 @@ class MotorController:
         self.root.geometry('1600x300')
         self.root.title("Motor Controller")
         self.root.iconbitmap("resources/icon-removebg.ico")
-        self.logo = Image.open("resources/image.png")
+        self.logo = Image.open("resources/image-removebg.png.png")
 
         #TODO: Please manually change the com port to Arduino COM port
         # we have set it to COM5, as default
