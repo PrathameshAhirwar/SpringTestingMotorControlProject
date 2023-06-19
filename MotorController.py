@@ -28,7 +28,7 @@ class MotorController:
         self.root.geometry('1600x300')
         self.root.title("Motor Controller")
         self.root.iconbitmap("resources/icon-removebg.ico")
-        self.logo = Image.open("resources/image-removebg.png.png")
+        self.logo = Image.open("resources/image-removebg.png")
 
         #TODO: Please manually change the com port to Arduino COM port
         # we have set it to COM5, as default
@@ -36,19 +36,19 @@ class MotorController:
         self.serial = serial.Serial('COM5', 9600, timeout=3)
         time.sleep(2)
         with open("./arduino/sketch_mar14a.ino", 'r') as f:
-          code = f.read()
-          self.serial.write(code.encode())
-        self.filename = 'weight_data.xlsx'
+            code = f.read()
+            self.serial.write(code.encode())
+            self.filename = 'weight_data.xlsx'
 
         # check if the file already exists
         if os.path.isfile(self.filename):
             self.wb = load_workbook(filename=self.filename)
             self.ws = self.wb.active
         else:
-           self.wb = Workbook()
-           self.ws = self.wb.active
-           self.ws.append(['Time', 'Weight (g)','Result'])
-           self.wb.save(self.filename)
+            self.wb = Workbook()
+            self.ws = self.wb.active
+            self.ws.append(['Time', 'Weight (g)','Result'])
+            self.wb.save(self.filename)
         #
         # Create dropdown menu for selecting serial port
         self.logo = self.logo.resize((150, 150))  # resize the image
